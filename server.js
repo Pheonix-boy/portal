@@ -4,7 +4,6 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const bcrypt = require("bcrypt");
-const mysql = require("mysql2/promise");
 const cookieParser = require("cookie-parser");
 const multer = require("multer");
 const fs = require("fs");
@@ -27,7 +26,6 @@ const db = require("./db");
 
 async function startServer() {
     try {
-        await initDB();
         console.log("✅ MySQL Connected");
 
         const PORT = process.env.PORT || 3000;
