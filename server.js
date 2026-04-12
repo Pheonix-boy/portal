@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // ================== DATABASE ==================
-let db;
+const db = require("./db");
 
 async function startServer() {
     try {
