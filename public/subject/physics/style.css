@@ -1,0 +1,114 @@
+/* Scroll wrapper with smooth horizontal scroll */
+.scroll-wrapper {
+    overflow-x: auto;       /* enable horizontal scroll */
+    overflow-y: hidden;     /* hide vertical scroll */
+    padding-bottom: 10px;
+    scroll-behavior: smooth; /* smooth scrolling effect */
+}
+
+/* Optional: hide default scrollbar but keep scroll functionality */
+.scroll-wrapper::-webkit-scrollbar {
+    height: 6px;           /* thin scrollbar */
+}
+
+.scroll-wrapper::-webkit-scrollbar-thumb {
+    background-color: #888; 
+    border-radius: 3px;
+}
+
+.scroll-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Table styling similar to previous card style */
+#materialsTable {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 600px; /* ensures table doesn't shrink too much */
+}
+
+#materialsTable th, #materialsTable td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    transition: transform 0.3s ease; /* smooth hover effect */
+}
+
+#materialsTable tr:hover td {
+    transform: translateX(5px); /* subtle move to right on hover */
+    background-color: #f0f0f0;
+}
+
+#materialsTable a {
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: 500;
+}
+
+#materialsTable a:hover {
+    text-decoration: underline;
+}
+body {
+    font-family: Arial, sans-serif;
+    background: #121212;
+    color: #fff;
+    padding: 2rem;
+}
+
+.dashboard h1, h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+}
+
+th, td {
+    padding: 0.75rem 1rem;
+    border: 1px solid #555;
+    text-align: left;
+}
+
+th {
+    background: #222;
+}
+
+tr:nth-child(even) {
+    background: #1a1a1a;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    background: #ff5f6d;
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+button:hover {
+    background: #ffc371;
+    color: #000;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+form label {
+    flex-basis: 100%;
+}
+
+form input, form select {
+    flex: 1 1 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: none;
+}

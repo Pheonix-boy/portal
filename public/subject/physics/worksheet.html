@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics Worksheets</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Physics Worksheets</h1>
+
+    <div class="scroll-wrapper">
+        <table id="materialsTable">
+            <thead>
+                <tr>
+                    <th>Chapter</th>
+                    <th>File</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<script>
+async function fetchMaterials() {
+    const res = await fetch("/materials?subject=Physics&type=Worksheet");
+    const data = await res.json();
+    const tbody = document.getElementById("materialsTable").querySelector("tbody");
+    tbody.innerHTML = "";
+    data.forEach(mat => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${mat.chapter}</td><td><a href="/uploads/${mat.filename}" target="_blank">View</a></td>`;
+        tbody.appendChild(row);
+    });
+}
+const rows = document.querySelectorAll("#materialsTable tbody tr");
+
+window.addEventListener("scroll", () => {
+    const triggerBottom = window.innerHeight * 0.9; // when row enters view
+    rows.forEach(row => {
+        const rowTop = row.getBoundingClientRect().top;
+        if(rowTop < triggerBottom){
+            row.style.transform = "translateX(0)";
+            row.style.opacity = "1";
+        } else {
+            row.style.transform = "translateX(-50px)";
+            row.style.opacity = "0";
+        }
+    });
+});
+fetchMaterials();
+</script>
+</body>
+</html>
