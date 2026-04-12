@@ -11,7 +11,10 @@ const fs = require("fs");
 const app = express();
 
 // ================== MIDDLEWARE ==================
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true
+}));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -24,19 +27,24 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // ================== DATABASE ==================
 const db = require("./db");
 
-async function startServer() {
-    try {
-        console.log("✅ MySQL Connected");
+// Define PORT first
+const PORT = process.env.PORT || 3000;
 
-        const PORT = process.env.PORT || 3000;
-        app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+// Start server only after DB connection
+(async () => {
+    try {
+        await db.execute("SELECT 1"); // test DB connection
+        console.log("✅ Database connected");
+
+        app.listen(PORT, () => {
+            console.log(`🚀 Server running on port ${PORT}`);
+        });
 
     } catch (err) {
-        console.error("❌ DB Error:", err);
+        console.error("❌ Database connection failed:", err);
+        process.exit(1); // stop app if DB fails
     }
-}
-
-startServer();
+})();
 // ================== AUTH MIDDLEWARE ==================
 function authMiddleware(req, res, next) {
     const username = req.cookies.username;
