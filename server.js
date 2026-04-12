@@ -25,17 +25,6 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // ================== DATABASE ==================
 let db;
 
-async function initDB() {
-    db = await mysql.createPool({
-        host: "localhost",
-        user: "root",
-        password: "Student_server",
-        database: "myapp",
-        waitForConnections: true,
-        connectionLimit: 10
-    });
-}
-
 async function startServer() {
     try {
         await initDB();
