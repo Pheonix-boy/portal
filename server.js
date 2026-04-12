@@ -312,4 +312,3 @@ app.delete("/admin/forgot-password/:id", adminMiddleware, async (req, res) => {
     res.json({ success: true });
 });
 
-const PORT = process.env.PORT || 3000;
