@@ -1,3 +1,4 @@
+require('dotenv').config();
 // ================== IMPORTS ==================
 const express = require("express");
 const cors = require("cors");
@@ -35,10 +36,20 @@ async function initDB() {
     });
 }
 
-initDB()
-    .then(() => console.log("✅ MySQL Connected"))
-    .catch(err => console.error("❌ DB Error:", err));
+async function startServer() {
+    try {
+        await initDB();
+        console.log("✅ MySQL Connected");
 
+        const PORT = process.env.PORT || 3000;
+        app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
+    } catch (err) {
+        console.error("❌ DB Error:", err);
+    }
+}
+
+startServer();
 // ================== AUTH MIDDLEWARE ==================
 function authMiddleware(req, res, next) {
     const username = req.cookies.username;
@@ -312,6 +323,4 @@ app.delete("/admin/forgot-password/:id", adminMiddleware, async (req, res) => {
     res.json({ success: true });
 });
 
-// ================== SERVER ==================
-const PORT = 3000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+const PORT = process.env.PORT || 3000;
